@@ -51,7 +51,7 @@
                         <td>{{$subject->created_at}}</td>
 
                         <td>
-                            <a href="{{route('admins.subjectEdit', 1)}}" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
+                            <a href="{{route('admins.subjectedit', 1)}}" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
                                 <i class="la la-edit"></i>
                             </a>
                             <button type="submit" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">

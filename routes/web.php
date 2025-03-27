@@ -22,6 +22,7 @@ Route::patch('students/{id}', [AdminController::class, 'update'])->name('admins.
 
 // Student subjects
 Route::get('student/subjects', [AdminController::class, 'subjectIndex'])->name('admins.subjectlist');
+Route::post('student/subjects', [AdminController::class, 'subjectStore'])->name('admins.subjectStore');
 Route::get('student/subject/create', [AdminController::class, 'subjectCreate'])->name('admins.subjectcreate');
 Route::get('student/subject/{id}/edit', [AdminController::class, 'subjectEdit'])->name('admins.subjectedit');
 

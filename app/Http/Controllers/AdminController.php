@@ -165,14 +165,14 @@ class AdminController extends Controller
 
         );
     }
-    // public function rollStore(Request $request)
-    // {
-    //     $request->validate([
-    //         'roll_no' => 'required|unique:roll_numbers',
-    //     ]);
-    //     RollNumber::create(['roll_no' => $request->roll_no]);
-    //     return redirect()->route('admins.rolllist')->with('success', 'Roll Created successfully');
-    // }
+    public function subjectStore(Request $request)
+    {
+        $validated = $request->validate([
+            'subject_name' => 'required|max:112',
+        ]);
+      Subject::create($validated);
+        return redirect()->route('admins.subjectlist')->with('success', 'Subject Created successfully');
+    }
     public function subjectCreate()
     {
         return view('admin.students.subjects.add');
