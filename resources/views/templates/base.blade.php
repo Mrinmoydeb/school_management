@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="/assets/css/ready.css">
     <link rel="stylesheet" href="/assets/css/demo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
@@ -199,18 +200,30 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('admins.studentindex')}}">
+                            <i class="la la-table"></i>
+                            <p>Teachers</p>
+                            <!-- <span class="badge badge-count">14</span> -->
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="forms.html">
                             <i class="la la-keyboard-o"></i>
                             <p>Classes</p>
                             <!-- <span class="badge badge-count">50</span> -->
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('admins.rolllist')}}">
+                            <i class="la la-keyboard-o"></i>
+                            <p>Roll Numbers</p>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
-                        <a href="tables.html">
+                        <a href="{{route('admins.subject')}}">
                             <i class="la la-th"></i>
                             <p>Subjects</p>
-                            <!-- <span class="badge badge-count">6</span> -->
                         </a>
                     </li>
                     <li class="nav-item">
@@ -239,7 +252,7 @@
                             <p>Applied students</p>
                             <!-- <span class="badge badge-count">14</span> -->
                         </a>
-                    </li> -->
+                    </li>
 
                 </ul>
             </div>
@@ -266,6 +279,9 @@
 <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
 <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="/assets/js/ready.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
 <!-- <script src="/assets/js/demo.js"></script> -->
 
 </html>
