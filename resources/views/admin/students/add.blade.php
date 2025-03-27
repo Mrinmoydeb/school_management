@@ -75,9 +75,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Subjects</label>
+                        <label for="email">Class</label>
                         <select name="roll_id" id="" class="form-control">
-                            <option selected>Select</option>
+                            <option selected>Select Class</option>
 
                             <option value="#">dummy</option>
 

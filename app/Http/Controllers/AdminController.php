@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RollNumber;
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,7 +57,7 @@ class AdminController extends Controller
     public function create(Request $request)
     {
         $roll_numbers = RollNumber::all();
-        return view('admin.students.add',[
+        return view('admin.students.add', [
             'roll_numbers' => $roll_numbers,
         ]);
     }
@@ -149,4 +150,50 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admins.rolllist')->with('success', 'Role No update Successfully');
     }
+
+    // Sudent subjects
+
+
+    public function subjectIndex()
+    {
+        $subjects = Subject::all();
+        return view(
+            'admin.students.subjects.index',
+            [
+                'subjects' => $subjects,
+            ]
+
+        );
+    }
+    // public function rollStore(Request $request)
+    // {
+    //     $request->validate([
+    //         'roll_no' => 'required|unique:roll_numbers',
+    //     ]);
+    //     RollNumber::create(['roll_no' => $request->roll_no]);
+    //     return redirect()->route('admins.rolllist')->with('success', 'Roll Created successfully');
+    // }
+    public function subjectCreate()
+    {
+        return view('admin.students.subjects.add');
+    }
+
+    public function subjectEdit(Request $request, $id)
+    {
+        // $roll = RollNumber::findOrFail($id);
+        return view('admin.students.subjects.edit', [
+            // 'roll' => $roll,
+        ]);
+    }
+    // public function rollUpdate(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'roll_no' => 'required|unique:roll_numbers,roll_no,' . $id,
+    //     ]);
+    //     $roll = RollNumber::findOrFail($id);
+    //     $roll->update([
+    //         'roll_no' => $request->roll_no,
+    //     ]);
+    //     return redirect()->route('admins.rolllist')->with('success', 'Role No update Successfully');
+    // }
 }

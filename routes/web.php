@@ -20,6 +20,12 @@ Route::post('students', [AdminController::class, 'store'])->name('admins.student
 Route::get('students/{id}/edit', [AdminController::class, 'edit'])->name('admins.studentedit');
 Route::patch('students/{id}', [AdminController::class, 'update'])->name('admins.studentupdate');
 
+// Student subjects
+Route::get('student/subjects', [AdminController::class, 'subjectIndex'])->name('admins.subjectlist');
+Route::get('student/subject/create', [AdminController::class, 'subjectCreate'])->name('admins.subjectcreate');
+Route::get('student/subject/{id}/edit', [AdminController::class, 'subjectEdit'])->name('admins.subjectedit');
+
+
 // Roll route
 Route::get('student/roll', [AdminController::class, 'rollIndex'])->name('admins.rolllist');
 Route::post('student/roll', [AdminController::class, 'rollStore'])->name('admins.rollstore');

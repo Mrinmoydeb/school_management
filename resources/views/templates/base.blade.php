@@ -221,7 +221,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{route('admins.subject')}}">
+                        <a href="{{route('admins.subjectlist')}}">
                             <i class="la la-th"></i>
                             <p>Subjects</p>
                         </a>
