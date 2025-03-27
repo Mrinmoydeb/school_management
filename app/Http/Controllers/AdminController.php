@@ -2,15 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RollNumber;
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function uthcheck(Request $request)
+    {
+        $request->validate([
+            'email',
+            'password'
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('admins.dashboard')->with('succes', 'You have success fully loggedin');
+            } elseif ($user->role === 'parent') {
+                return redirect()->route('admins.studentindex')->with('succes', 'You have success fully loggedin');
+            } else {
+                return redirect()->route('admins.login')->with('error', 'Unauthorize access');
+            }
+        }
+
+        return back()->with('error', 'Access Denied');
+    }
     public function dashboard()
     {
         return view('admin.dashboard');
+    }
+    public function subject()
+    {
+        return view('admin.students.subject');
     }
     public function index()
     {
@@ -29,20 +56,22 @@ class AdminController extends Controller
 
     public function create(Request $request)
     {
-
-
-        return view('admin.students.add');
+        $roll_numbers = RollNumber::all();
+        return view('admin.students.add', [
+            'roll_numbers' => $roll_numbers,
+        ]);
     }
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'student_name' => 'required',
-            'parent_name' => 'required',
-            'class' => 'required',
-            'section' => 'required',
+            'name' => 'required',
+            'dob' => 'required',
+            'image' => 'nullable|nullable',
+            'email' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'age' => 'required',
+            'city' => 'required',
+            'gender' => 'required',
         ]);
         Student::create($validated);
         return redirect()->route('admins.studentindex')->with('success', 'student added succesfully');
@@ -73,5 +102,98 @@ class AdminController extends Controller
     //         }
     //     }
     //     return redirect()->route('admins.login')->with('error', 'Invalid credentials');
+    // }
+
+
+
+    // Student Roll
+
+    public function rollIndex()
+    {
+        $rolls = RollNumber::all();
+        return view(
+            'admin.students.roll.index',
+            [
+                'rolls' => $rolls,
+            ]
+
+        );
+    }
+    public function rollStore(Request $request)
+    {
+        $request->validate([
+            'roll_no' => 'required|unique:roll_numbers',
+        ]);
+        RollNumber::create(['roll_no' => $request->roll_no]);
+        return redirect()->route('admins.rolllist')->with('success', 'Roll Created successfully');
+    }
+    public function rollCreate()
+    {
+        return view('admin.students.roll.add');
+    }
+
+    public function rollEdit(Request $request, $id)
+    {
+        $roll = RollNumber::findOrFail($id);
+        return view('admin.students.roll.edit', [
+            'roll' => $roll,
+        ]);
+    }
+    public function rollUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'roll_no' => 'required|unique:roll_numbers,roll_no,' . $id,
+        ]);
+        $roll = RollNumber::findOrFail($id);
+        $roll->update([
+            'roll_no' => $request->roll_no,
+        ]);
+        return redirect()->route('admins.rolllist')->with('success', 'Role No update Successfully');
+    }
+
+    // Sudent subjects
+
+
+    public function subjectIndex()
+    {
+        $subjects = Subject::all();
+        return view(
+            'admin.students.subjects.index',
+            [
+                'subjects' => $subjects,
+            ]
+
+        );
+    }
+    // public function rollStore(Request $request)
+    // {
+    //     $request->validate([
+    //         'roll_no' => 'required|unique:roll_numbers',
+    //     ]);
+    //     RollNumber::create(['roll_no' => $request->roll_no]);
+    //     return redirect()->route('admins.rolllist')->with('success', 'Roll Created successfully');
+    // }
+    public function subjectCreate()
+    {
+        return view('admin.students.subjects.add');
+    }
+
+    public function subjectEdit(Request $request, $id)
+    {
+        // $roll = RollNumber::findOrFail($id);
+        return view('admin.students.subjects.edit', [
+            // 'roll' => $roll,
+        ]);
+    }
+    // public function rollUpdate(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'roll_no' => 'required|unique:roll_numbers,roll_no,' . $id,
+    //     ]);
+    //     $roll = RollNumber::findOrFail($id);
+    //     $roll->update([
+    //         'roll_no' => $request->roll_no,
+    //     ]);
+    //     return redirect()->route('admins.rolllist')->with('success', 'Role No update Successfully');
     // }
 }

@@ -7,7 +7,7 @@
     </div>
     @endif
     <div class="card">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-3">
                 <div class="form-group has-success">
                     <label for="email">Roll No</label>
@@ -26,34 +26,32 @@
 
                 <button type="submit" class="btn btn-success mt-4">Filter</button>
             </div>
-        </div>
+        </div> -->
         <div class="card-header d-flex" style="justify-content: space-between;">
-            <div class="card-title">Students</div>
-            <a href="{{route('admins.studentcreate')}}" class="btn btn-primary">Add new</a>
+            <div class="card-title"></div>
+            <a href="{{route('admins.subjectcreate')}}" class="btn btn-primary">Add new</a>
         </div>
         <div class="card-body">
             <table class="table table-head-bg-success">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Roll</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Section</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Created At</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($subjects as $subject)
                     <tr>
-                        <td>1</td>
+                        <td></td>
                         <td>
-                            <a href="{{route('admins.studentshow', 1)}}">311131</a>
+                            <a href="{{route('admins.studentshow', $subject->id)}}">{{$subject->subject_name}}</a>
                         </td>
-                        <td>Jhon</td>
-                        <td>2</td>
-                        <td>B</td>
+                        <td>{{$subject->created_at}}</td>
+
                         <td>
-                            <a href="{{route('admins.studentedit', 2)}}" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
+                            <a href="{{route('admins.subjectEdit', 1)}}" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">
                                 <i class="la la-edit"></i>
                             </a>
                             <button type="submit" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">
@@ -61,7 +59,7 @@
                             </button>
                         </td>
                     </tr>
-
+                    @endforeach
 
                 </tbody>
             </table>
